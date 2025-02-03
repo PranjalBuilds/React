@@ -1,5 +1,14 @@
 @tailwind base;
 @tailwind components;
+
+.best {
+  @apply inline-flex bg-yellow-500 text-white font-semibold px-2 py-1 ml-1 mb-1 rounded;
+}
+
+.d-none {
+  display: none;
+}
+
 @tailwind utilities;
 
 body {
@@ -7,4 +16,3 @@ body {
   /* background-color: black; */
   /* color: white; */
 }
-
