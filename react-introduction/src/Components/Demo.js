@@ -2,8 +2,20 @@ import React from 'react'
 import './../index.css'
 
 const Demo = (props) => {
+
+  const foodOrderHandler = () => {
+    //console.log('Clicked', {title: props.title, price: props.price});
+
+    if(props.price > 200) {
+      alert(`You've got FREE DELIVERY! Order total: ₹ ${props.price} only.`)
+    }
+    else {
+      alert (`Delivery charges apply. Order total: ₹ ${props.price} + ₹40 = ₹${props.price + 40}`)
+    }
+  }
+
   return (
-    <div className='mx-2 my-1 border-gray-200 px-4 py-4 border-2 rounded-xl w-80 flex flex-col min-h-[420px] drop-shadow-lg'>
+    <div className='mx-2 my-1 border-gray-200 px-4 py-4 border-2 rounded-xl w-80 flex flex-col min-h-[420px] drop-shadow-lg' onClick={foodOrderHandler}>
 
     <div className='h-48 w-full overflow-hidden rounded-t-lg'>
       <img src={"https://picsum.photos/900/1600"} alt={props.title} className='object-cover w-full h-full'/>
