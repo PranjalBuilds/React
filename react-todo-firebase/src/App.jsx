@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import firebaseUrl from '../firebaseConfig'; // see README.md file  
 import './App.css'
 import AlertToast from './Components/AlertToast';
+import TodoCard from './Components/TodoCard';
 
 function App() {
   const titleInput = useRef()
@@ -10,6 +11,34 @@ function App() {
   let [showAlert, setShowAlert] = useState(false)
   let [loader, setLoader] = useState(false)
 
+  let [todoLst, setTodoLst] = useState([]);
+
+  //fetching data from firebase
+
+  useEffect(() => {
+   
+    fetch(firebaseUrl).then((data)=>{
+      return data.json()
+    }).then((data)=>{
+      //console.log(data);
+      
+      let tempTodoLst = []
+  
+      for(const key in data) {
+        let fetchedTodo = {
+          id: key,
+          ...data[key]
+        }
+      
+        tempTodoLst.push(fetchedTodo)
+      }
+      setTodoLst(tempTodoLst)
+    })
+    
+  }, [])
+
+
+  // sending data to firebase
   async function addTask() {
     setLoader(true)
 
@@ -33,6 +62,8 @@ function App() {
       setShowAlert(true)
       setLoader(false)
       
+      setTodoLst((previousTodos) => [...previousTodos, todos])
+
       let data = await response.json();
       console.log('Task added:', data);
   
@@ -46,6 +77,7 @@ function App() {
   
 
   return (
+  <>
     <div className='max-w-sm mx-auto my-12 box-border'>
       <div className={showAlert == true ? 'flex flex-row align-center place-content-center' : 'hidden'}> <AlertToast/> </div>
 
@@ -67,6 +99,14 @@ function App() {
       </button>
     
     </div>  
+
+    {
+      todoLst.map((todo)=>{
+        return <TodoCard key = {todo.id} title = {todo.title} desc = {todo.desc} />
+      })
+    }
+
+  </>
   )
 }
 
