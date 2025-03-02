@@ -23,5 +23,4 @@ export default firebaseURl;
 # code by : Pranjal Thakkar
 
 GitHub   - PranjalBuilds 
-X        - PranjalDevHub
 LinkedIn - pranjal-thakkar
