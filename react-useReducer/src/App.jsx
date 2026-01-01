@@ -17,45 +17,40 @@ const App = () => {
     color: "black"
   };
 
-  //const [state, dispatch] = useReducer(reducer, 0);
-  const [cart, setCart] = useState(
-    [
-      {
-        id: 10031, 
-        productName: "laptop",
-        price: 30000
-      },
-      {
-        id: 10032, 
-        productName: "mobile",
-        price: 20000
-      },
-      {
-        id: 10033 , 
-        productName: "tablet",
-        price: 10000
-      },
-    ]
-  )
+  
+  const [cart, setCart] = useState([])
 
+  const addItem = () => {
+    const newItem = `item ${cart.length + 1}`
+    setCart((cart) => [...cart, newItem])
+  };
+
+  const removeItem = (index) => {
+    setCart((cart) => cart.filter((_, i) => i !== index));
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+  
   return (
     <>
       <div style={container}>
         <h2>Add to cart (using useState)</h2>
           <ul>
             {
-            cart.map((item) => (
-              <li key={item.id}>{item.productName} -  ₹{item.price}
+            cart.map((item, index) => (
+              <li key={item}> {item}
               &nbsp; 
-                <button style={btns}>Remove</button>
+                <button onClick={() => removeItem(index)} style={btns}>Remove</button>
               </li>
             
           ))
         }
           </ul>
-        <button >Add item</button>
+        <button onClick={addItem}>Add item</button>
         &nbsp;
-        <button>Clear cart</button>
+        <button onClick={clearCart}>Clear cart</button>
         <p>Total items: {cart.length}</p>
       </div>
   </>
