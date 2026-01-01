@@ -1,23 +1,7 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 
 function reducer(state, action){
-  console.log("State : ", state);
-  console.log("Action : ", action);
-
-  switch(action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      if (state > 0 ){
-        return state - 1;
-      }
-      else {
-        alert("Value Must be greater 0");
-        return state = 0;
-      }
-    default: 
-      return state;
-  }
+  
 }
 const App = () => {
   const container = { 
@@ -26,22 +10,56 @@ const App = () => {
   };
 
   const btns = {
-    fontSize: "36px",
+    fontSize: "18px",
     margin: "5px",
-    padding: "18px 30px",
+    padding: "4px 16px",
+    backgroundColor: "yellow",
+    color: "black"
   };
 
-  const [state, dispatch] = useReducer(reducer, 0);
+  //const [state, dispatch] = useReducer(reducer, 0);
+  const [cart, setCart] = useState(
+    [
+      {
+        id: 10031, 
+        productName: "laptop",
+        price: 30000
+      },
+      {
+        id: 10032, 
+        productName: "mobile",
+        price: 20000
+      },
+      {
+        id: 10033 , 
+        productName: "tablet",
+        price: 10000
+      },
+    ]
+  )
 
   return (
-    <div style={container}>
-      <h1> Count is {state}</h1>
-      <div>
-        <button style={btns} onClick={() => dispatch({type: "INCREMENT"})}> +</button>
-        <button style={btns} onClick={() => dispatch({type: "DECREMENT"})}> -</button>
+    <>
+      <div style={container}>
+        <h2>Add to cart (using useState)</h2>
+          <ul>
+            {
+            cart.map((item) => (
+              <li key={item.id}>{item.productName} -  ₹{item.price}
+              &nbsp; 
+                <button style={btns}>Remove</button>
+              </li>
+            
+          ))
+        }
+          </ul>
+        <button >Add item</button>
+        &nbsp;
+        <button>Clear cart</button>
+        <p>Total items: {cart.length}</p>
       </div>
-    </div>
-  )
+  </>
+  );
 }
 
 export default App;
