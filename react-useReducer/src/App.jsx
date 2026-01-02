@@ -46,7 +46,7 @@ const App = () => {
     setCart([]);
   };
   return (
-    <>
+    <> // no changes
       <div style={container}>
         <h2>Add to cart (using useState)</h2>
           <ul>
