@@ -1,5 +1,5 @@
 import React from 'react'
-import { Post } from '../Posts/Post.jsx';
+import Post from '../Posts/Post.jsx';
 
 const MainComponent = () => {
   return (

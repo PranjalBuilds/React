@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { useContext } from 'react'
 import { loginContext } from '../../../App'
 
 const SinglePost = () => {
