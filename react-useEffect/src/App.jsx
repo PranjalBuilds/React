@@ -7,7 +7,7 @@ function App() {
 
   const [date, setDate] = useState(0);
 
-  useEffect(()=>{
+  useEffect(()=>{ 
     setInterval(() => {
       const updatedDate = new Date();
       setDate(updatedDate.toLocaleTimeString())
@@ -15,9 +15,9 @@ function App() {
   },[])
 
   return (
-    <>
+    <>  
       <div>
-        <h1 className="text-9xl font-bold text-white text-center bg-blue-600">Date: {date}</h1>  
+        <h1 className="text-9xl font-bold text-white text-center bg-blue-600 selection:bg-[#00FF00] selection:text-black  ">Date: {date}</h1>  
       </div>
     </>
   )
